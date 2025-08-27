@@ -20,8 +20,8 @@ export interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   { path: '/', element: Home },
-  { path: '/auth', element: UnifiedAuth },
-  { path: '/auth/jumia', element: JumiaStyleAuth },
+  { path: '/auth', element: JumiaStyleAuth },
+  { path: '/auth/unified', element: UnifiedAuth },
   { path: '/auth/login', element: Login },
   { path: '/auth/register', element: Register },
   { path: '/auth/reset-password', element: ResetPassword },

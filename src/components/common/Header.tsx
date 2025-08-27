@@ -86,7 +86,7 @@ const Header = () => {
               <User className="w-5 h-5" />
             </button>
             <Link to="/auth/login" className="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold py-2 px-6 rounded-xl transition-all duration-300 text-sm">Sign In</Link>
-            <Link to="/auth/jumia" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm">Join Now</Link>
+            <Link to="/auth" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm">Join Now</Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -138,7 +138,7 @@ const Header = () => {
               </a>
               <div className="px-4 pt-4 border-t border-gray-200 space-y-2">
                 <Link to="/auth/login" className="w-full btn-outline text-sm">Sign In</Link>
-                <Link to="/auth/jumia" className="w-full btn-primary text-sm">Join Now</Link>
+                <Link to="/auth" className="w-full btn-primary text-sm">Join Now</Link>
               </div>
             </nav>
           </div>
