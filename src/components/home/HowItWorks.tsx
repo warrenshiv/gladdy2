@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UserPlus, Search, CreditCard, Truck, FileText, Package, DollarSign } from 'lucide-react';
 
 const HowItWorks = () => {
