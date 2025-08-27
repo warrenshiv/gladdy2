@@ -1,105 +1,179 @@
-import React from 'react';
-import { Truck, Wrench, Tag, Package, Store, Megaphone } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  Stethoscope, 
+  UtensilsCrossed, 
+  Home, 
+  Wrench, 
+  ShoppingCart, 
+  Megaphone,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 
 const ServiceCategories = () => {
-  const services = [
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const categories = [
     {
-      icon: Truck,
-      title: 'Order Delivery',
-      description: 'Fast-food, Pharmacy, Packages delivered to your doorstep',
-      gradient: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-50',
-      iconColor: 'text-green-600'
+      icon: Stethoscope,
+      title: 'Medical',
+      description: 'Healthcare services and medical supplies',
+      gradient: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      iconColor: 'text-red-600'
     },
     {
-      icon: Wrench,
-      title: 'Business Services',
-      description: 'Craftsmen, Housekeeping, Laundry and professional services',
-      gradient: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-50',
-      iconColor: 'text-blue-600'
-    },
-    {
-      icon: Tag,
-      title: 'Pop-Up Deals',
-      description: 'Exclusive promotional storefronts and limited-time offers',
+      icon: UtensilsCrossed,
+      title: 'Food & Dining',
+      description: 'Restaurants, cafes, and food delivery',
       gradient: 'from-orange-500 to-orange-600',
       bgColor: 'bg-orange-50',
       iconColor: 'text-orange-600'
     },
     {
-      icon: Package,
-      title: 'Logistics Services',
-      description: 'Comprehensive inventory management and supply chain solutions',
+      icon: Home,
+      title: 'Home Goods',
+      description: 'Furniture, appliances, and home essentials',
+      gradient: 'from-blue-500 to-blue-600',
+      bgColor: 'bg-blue-50',
+      iconColor: 'text-blue-600'
+    },
+    {
+      icon: Wrench,
+      title: 'Services',
+      description: 'Domestic to skilled professional services',
+      gradient: 'from-green-500 to-green-600',
+      bgColor: 'bg-green-50',
+      iconColor: 'text-green-600'
+    },
+    {
+      icon: ShoppingCart,
+      title: 'Groceries Marketplace',
+      description: 'Fresh produce and daily essentials',
       gradient: 'from-purple-500 to-purple-600',
       bgColor: 'bg-purple-50',
       iconColor: 'text-purple-600'
     },
     {
-      icon: Store,
-      title: 'E-commerce Marketplace',
-      description: 'Complete vendor listings and online storefront management',
-      gradient: 'from-indigo-500 to-indigo-600',
-      bgColor: 'bg-indigo-50',
-      iconColor: 'text-indigo-600'
-    },
-    {
       icon: Megaphone,
-      title: 'Marketing Ads',
-      description: 'Strategic business promotion and digital marketing solutions',
+      title: 'Marketing & Ads',
+      description: 'Business promotion and advertising solutions',
       gradient: 'from-pink-500 to-pink-600',
       bgColor: 'bg-pink-50',
       iconColor: 'text-pink-600'
     }
   ];
 
+  const itemsPerView = {
+    mobile: 2,
+    tablet: 3,
+    desktop: 4
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex + 1 >= categories.length ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex - 1 < 0 ? categories.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
-    <section id="services" className="section-padding bg-light-gray">
-      <div className="container-max">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-rich-charcoal mb-6">
-            Everything You Need in <span className="text-gradient">One Platform</span>
+    <section className="py-8 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-charcoal mb-2">
+            Browse <span className="text-gradient">Categories</span>
           </h2>
-          <p className="text-xl text-medium-gray max-w-3xl mx-auto font-medium">
-            From delivery to marketing, we provide comprehensive solutions for businesses and customers across Sierra Leone
+          <p className="text-medium-gray">
+            Discover what you need across Sierra Leone
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
+        {/* Mobile Carousel */}
+        <div className="relative md:hidden">
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+            >
+              {categories.map((category, index) => {
+                const IconComponent = category.icon;
+                return (
+                  <div
+                    key={index}
+                    className="w-1/2 flex-shrink-0 px-2"
+                  >
+                    <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 text-center h-full">
+                      <div className={`w-12 h-12 bg-gradient-to-r ${category.gradient} rounded-xl flex items-center justify-center mb-3 mx-auto`}>
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-sm font-heading font-semibold text-charcoal mb-1">
+                        {category.title}
+                      </h3>
+                      <p className="text-xs text-medium-gray leading-tight">
+                        {category.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center z-10"
+          >
+            <ChevronLeft className="w-4 h-4 text-gray-600" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center z-10"
+          >
+            <ChevronRight className="w-4 h-4 text-gray-600" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-4 space-x-2">
+            {categories.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'bg-orange-500 w-4' : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {categories.map((category, index) => {
+            const IconComponent = category.icon;
             return (
               <div
                 key={index}
-                className={`bg-white rounded-3xl p-8 card-hover cursor-pointer group shadow-premium hover:shadow-premium-lg border border-gray-100`}
+                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
-                <div className={`w-16 h-16 bg-gradient-to-r ${service.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className={`w-16 h-16 bg-gradient-to-r ${category.gradient} rounded-2xl flex items-center justify-center mb-4 mx-auto`}>
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
-                
-                <h3 className="text-xl font-heading font-bold text-rich-charcoal mb-3">
-                  {service.title}
+                <h3 className="text-lg font-heading font-semibold text-charcoal mb-2">
+                  {category.title}
                 </h3>
-                
-                <p className="text-medium-gray leading-relaxed font-medium">
-                  {service.description}
+                <p className="text-medium-gray text-sm leading-relaxed">
+                  {category.description}
                 </p>
-
-                <div className="mt-6 flex items-center text-sm font-bold group-hover:text-orange-600 transition-colors">
-                  <span className={service.iconColor}>Learn More</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
               </div>
             );
           })}
-        </div>
-
-        <div className="text-center mt-12">
-          <button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-            Explore All Services
-          </button>
         </div>
       </div>
     </section>

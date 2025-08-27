@@ -1,133 +1,152 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Star, Truck, Users, MapPin } from 'lucide-react';
+import React from 'react';
+import { Truck, Wrench, Tag, Package, Store, Megaphone, Heart, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useRef } from 'react';
 
-const Hero = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
-  const backgroundImages = [
-    'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',
-    'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',
-    'https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',
-    // 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080'
+const ServiceCategories = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const services = [
+    {
+      icon: Heart,
+      title: 'Medical',
+      description: 'Healthcare services, pharmacies, and medical supplies',
+      gradient: 'from-green-500 to-green-600',
+      bgColor: 'bg-green-50',
+      iconColor: 'text-green-600'
+    },
+    {
+      icon: Truck,
+      title: 'Food & Dining',
+      description: 'Restaurants, fast food, and local cuisine delivered',
+      gradient: 'from-blue-500 to-blue-600',
+      bgColor: 'bg-blue-50',
+      iconColor: 'text-blue-600'
+    },
+    {
+      icon: Package,
+      title: 'Home Goods',
+      description: 'Furniture, appliances, and household essentials',
+      gradient: 'from-orange-500 to-orange-600',
+      bgColor: 'bg-orange-50',
+      iconColor: 'text-orange-600'
+    },
+    {
+      icon: Wrench,
+      title: 'Services',
+      description: 'Domestic to skilled professional services',
+      gradient: 'from-purple-500 to-purple-600',
+      bgColor: 'bg-purple-50',
+      iconColor: 'text-purple-600'
+    },
+    {
+      icon: ShoppingCart,
+      title: 'Groceries Marketplace',
+      description: 'Fresh produce, groceries, and daily essentials',
+      gradient: 'from-indigo-500 to-indigo-600',
+      bgColor: 'bg-indigo-50',
+      iconColor: 'text-indigo-600'
+    },
+    {
+      icon: Megaphone,
+      title: 'Marketing',
+      description: 'Business promotion and advertising services',
+      gradient: 'from-pink-500 to-pink-600',
+      bgColor: 'bg-pink-50',
+      iconColor: 'text-pink-600'
+    },
+    {
+      icon: Tag,
+      title: 'Ads',
+      description: 'Promotional deals and special offers',
+      gradient: 'from-yellow-500 to-yellow-600',
+      bgColor: 'bg-yellow-50',
+      iconColor: 'text-yellow-600'
+    },
+    {
+      icon: Store,
+      title: 'Marketplace',
+      description: 'General marketplace for various products',
+      gradient: 'from-teal-500 to-teal-600',
+      bgColor: 'bg-teal-50',
+      iconColor: 'text-teal-600'
+    }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        (prevIndex + 1) % backgroundImages.length
-      );
-    }, 5000); // Change image every 5 seconds
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
 
-    return () => clearInterval(interval);
-  }, [backgroundImages.length]);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Images Carousel */}
-      <div className="absolute inset-0">
-        {backgroundImages.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              backgroundImage: `url(${image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/20"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-white/5 to-transparent"></div>
-      
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-orange-500 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-primary-gold rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="relative z-10 container-max section-padding text-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Main Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-4 sm:mb-6 animate-fade-in leading-tight drop-shadow-lg">
-            Connecting Every Business,{' '}
-            <span className="bg-gradient-to-r from-primary-gold to-white bg-clip-text text-transparent">Delivering Every Dream</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-lg sm:text-xl md:text-2xl text-white/95 mb-6 sm:mb-8 max-w-3xl mx-auto animate-slide-up px-2 drop-shadow-md font-medium">
-            Sierra Leone's Premier Multi-Service Platform - Marketing, Logistics, E-commerce & More
+    <section id="services" className="py-8 sm:py-16 bg-light-gray">
+      <div className="container-max">
+        <div className="text-center mb-8 sm:mb-12 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-rich-charcoal mb-4">
+            Browse <span className="text-gradient">Categories</span>
+          </h2>
+          <p className="text-base sm:text-lg text-medium-gray max-w-2xl mx-auto font-medium">
+            Discover what you need across our diverse categories
           </p>
+        </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 animate-slide-up px-4 sm:px-0">
-            <button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-2 text-base sm:text-lg">
-              <span>Start Selling Today</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-            <button className="bg-white/95 backdrop-blur-sm border-2 border-white/50 text-orange-600 hover:bg-white hover:border-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-2 text-base sm:text-lg">
-              <span>Shop Now</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-          </div>
+        {/* Mobile Carousel */}
+        <div className="relative px-4">
+          {/* Navigation Buttons */}
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </button>
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-600" />
+          </button>
 
-          {/* Trust Indicators */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto animate-fade-in px-2 mb-8">
-            <div className="flex items-center justify-center space-x-2 text-white/80">
-              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" />
-              <span className="font-semibold text-white">500+</span>
-              <span className="text-sm sm:text-base">Local Businesses</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-white/80">
-              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-primary-gold flex-shrink-0" />
-              <span className="font-semibold text-white">10,000+</span>
-              <span className="text-sm sm:text-base">Happy Customers</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-white/80">
-              <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-              <span className="font-semibold text-white">Same-Day</span>
-              <span className="text-sm sm:text-base">Delivery</span>
-            </div>
-          </div>
-
-          {/* Location Badge */}
-          <div className="inline-flex items-center space-x-2 bg-white/95 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 shadow-2xl mx-2 border border-white/20">
-            <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" />
-            <span className="text-rich-charcoal font-semibold text-sm sm:text-base">Proudly Serving Sierra Leone</span>
-          </div>
-
-          {/* Carousel Indicators */}
-          <div className="mt-8 flex justify-center space-x-2">
-            {backgroundImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex 
-                    ? 'bg-white w-8' 
-                    : 'bg-white/50 hover:bg-white/75'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+          {/* Scrollable Categories */}
+          <div
+            ref={scrollContainerRef}
+            className="flex space-x-4 overflow-x-auto scrollbar-hide pb-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {services.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-32 sm:w-40 bg-white rounded-2xl p-4 sm:p-6 cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                >
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${service.gradient} rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
+                    <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  </div>
+                  
+                  <h3 className="text-sm sm:text-base font-heading font-bold text-rich-charcoal mb-2 leading-tight">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-xs sm:text-sm text-medium-gray leading-relaxed line-clamp-3">
+                    {service.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-
-      {/* Floating Elements */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-gentle hidden sm:block">
-        <div className="w-6 h-10 border-2 border-orange-500 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-orange-500 rounded-full mt-2 animate-pulse"></div>
+          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default Hero;
+export default ServiceCategories;
