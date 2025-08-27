@@ -149,6 +149,23 @@ h1, h2, h3, h4, h5, h6 {
   animation: bounce-gentle 2s infinite;
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
 @media (max-width: 768px) {
   .section-padding {
     @apply py-12 px-4;

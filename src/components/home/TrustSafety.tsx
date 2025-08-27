@@ -111,7 +111,7 @@ const TrustSafety = () => {
           </div>
         </div>
 
-        {/* Testimonials */}
+        {/* Testimonials Carousel */}
         <div className="mb-16">
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-heading font-bold text-charcoal mb-4">
@@ -122,35 +122,39 @@ const TrustSafety = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                <div className="flex items-center mb-6">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <h4 className="font-heading font-semibold text-charcoal">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-sm text-medium-gray">{testimonial.role}</p>
-                    <p className="text-sm text-green-800">{testimonial.location}</p>
+          {/* Carousel Container */}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll space-x-8">
+              {/* Duplicate testimonials for seamless loop */}
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div key={index} className="bg-white rounded-2xl p-8 shadow-lg flex-shrink-0 w-80">
+                  <div className="flex items-center mb-6">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="w-16 h-16 rounded-full object-cover mr-4"
+                    />
+                    <div>
+                      <h4 className="font-heading font-semibold text-charcoal">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-sm text-medium-gray">{testimonial.role}</p>
+                      <p className="text-sm text-green-800">{testimonial.location}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
 
-                <p className="text-medium-gray leading-relaxed italic">
-                  "{testimonial.text}"
-                </p>
-              </div>
-            ))}
+                  <p className="text-medium-gray leading-relaxed italic">
+                    "{testimonial.text}"
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
