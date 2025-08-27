@@ -6,3 +6,7 @@ export { default as TechInnovation } from './TechInnovation';
 export { default as TrustSafety } from './TrustSafety';
 export { default as GeographicCoverage } from './GeographicCoverage';
 export { default as CallToAction } from './CallToAction';
+export { default as SearchSection } from './SearchSection';
+export { default as FeaturedStores } from './FeaturedStores';
+export { default as TopDeals } from './TopDeals';
+export { default as TopPicks } from './TopPicks';

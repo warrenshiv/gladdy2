@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Stethoscope, 
   UtensilsCrossed, 
@@ -6,12 +6,14 @@ import {
   Wrench, 
   ShoppingCart, 
   Megaphone,
+  Tag,
+  Store,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
 
 const ServiceCategories = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     {
@@ -56,30 +58,40 @@ const ServiceCategories = () => {
     },
     {
       icon: Megaphone,
-      title: 'Marketing & Ads',
+      title: 'Marketing',
       description: 'Business promotion and advertising solutions',
       gradient: 'from-pink-500 to-pink-600',
       bgColor: 'bg-pink-50',
       iconColor: 'text-pink-600'
+    },
+    {
+      icon: Tag,
+      title: 'Ads',
+      description: 'Promotional deals and special offers',
+      gradient: 'from-yellow-500 to-yellow-600',
+      bgColor: 'bg-yellow-50',
+      iconColor: 'text-yellow-600'
+    },
+    {
+      icon: Store,
+      title: 'Marketplace',
+      description: 'General marketplace for various products',
+      gradient: 'from-teal-500 to-teal-600',
+      bgColor: 'bg-teal-50',
+      iconColor: 'text-teal-600'
     }
   ];
 
-  const itemsPerView = {
-    mobile: 2,
-    tablet: 3,
-    desktop: 4
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
   };
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex + 1 >= categories.length ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex - 1 < 0 ? categories.length - 1 : prevIndex - 1
-    );
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -94,86 +106,50 @@ const ServiceCategories = () => {
           </p>
         </div>
 
-        {/* Mobile Carousel */}
-        <div className="relative md:hidden">
-          <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-300 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
-            >
-              {categories.map((category, index) => {
-                const IconComponent = category.icon;
-                return (
-                  <div
-                    key={index}
-                    className="w-1/2 flex-shrink-0 px-2"
-                  >
-                    <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 text-center h-full">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${category.gradient} rounded-xl flex items-center justify-center mb-3 mx-auto`}>
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </div>
-                      <h3 className="text-sm font-heading font-semibold text-charcoal mb-1">
-                        {category.title}
-                      </h3>
-                      <p className="text-xs text-medium-gray leading-tight">
-                        {category.description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
+        {/* Carousel Container */}
+        <div className="relative">
           {/* Navigation Buttons */}
           <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center z-10"
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
           >
-            <ChevronLeft className="w-4 h-4 text-gray-600" />
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
           <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center z-10"
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
           >
-            <ChevronRight className="w-4 h-4 text-gray-600" />
+            <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
 
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-4 space-x-2">
-            {categories.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-orange-500 w-4' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {categories.map((category, index) => {
-            const IconComponent = category.icon;
-            return (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
-              >
-                <div className={`w-16 h-16 bg-gradient-to-r ${category.gradient} rounded-2xl flex items-center justify-center mb-4 mx-auto`}>
-                  <IconComponent className="w-8 h-8 text-white" />
+          {/* Scrollable Categories */}
+          <div
+            ref={scrollContainerRef}
+            className="flex space-x-4 overflow-x-auto scrollbar-hide pb-4 px-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {categories.map((category, index) => {
+              const IconComponent = category.icon;
+              return (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-32 sm:w-40 bg-white rounded-2xl p-4 sm:p-6 cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                >
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${category.gradient} rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
+                    <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  </div>
+                  
+                  <h3 className="text-sm sm:text-base font-heading font-bold text-rich-charcoal mb-2 leading-tight">
+                    {category.title}
+                  </h3>
+                  
+                  <p className="text-xs sm:text-sm text-medium-gray leading-relaxed line-clamp-3">
+                    {category.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-heading font-semibold text-charcoal mb-2">
-                  {category.title}
-                </h3>
-                <p className="text-medium-gray text-sm leading-relaxed">
-                  {category.description}
-                </p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

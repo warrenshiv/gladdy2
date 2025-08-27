@@ -8,12 +8,20 @@ import {
  GeographicCoverage, 
  CallToAction 
 } from '../components/home';
+import SearchSection from '../components/home/SearchSection';
+import FeaturedStores from '../components/home/FeaturedStores';
+import TopDeals from '../components/home/TopDeals';
+import TopPicks from '../components/home/TopPicks';
 
 function Home() {
   return (
     <>
       <Hero />
       <ServiceCategories />
+      <SearchSection />
+      <FeaturedStores />
+      <TopDeals />
+      <TopPicks />
       <HowItWorks />
       <TrustSafety />
       <GeographicCoverage />
