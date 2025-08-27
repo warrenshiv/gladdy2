@@ -72,10 +72,10 @@ const CallToAction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                <Link to="/auth/jumia" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
                 <button className="border border-gray-300 hover:border-orange-300 hover:text-orange-600 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
                   Learn More
                 </button>
@@ -157,10 +157,10 @@ const CallToAction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                <Link to="/auth/jumia" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
                   <span>Start Shopping</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
                 <button className="border border-gray-300 hover:border-orange-300 hover:text-orange-600 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
                   Download App
                 </button>

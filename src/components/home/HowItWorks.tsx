@@ -137,7 +137,9 @@ const HowItWorks = () => {
               }
             </p>
             <button className="bg-white text-orange-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors">
-              {activeTab === 'customers' ? 'Start Shopping Now' : 'Apply as Vendor'}
+              <Link to="/auth/jumia">
+                {activeTab === 'customers' ? 'Start Shopping Now' : 'Apply as Vendor'}
+              </Link>
             </button>
           </div>
         </div>

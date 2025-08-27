@@ -5,7 +5,9 @@ import {
   Register, 
   ResetPassword, 
   ConfirmResetPassword, 
-  ChangePassword 
+  ChangePassword,
+  UnifiedAuth,
+  JumiaStyleAuth
 } from './pages/auth';
 
 import { vendorRoutes } from './pages/vendor/routes';
@@ -18,6 +20,8 @@ export interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   { path: '/', element: Home },
+  { path: '/auth', element: UnifiedAuth },
+  { path: '/auth/jumia', element: JumiaStyleAuth },
   { path: '/auth/login', element: Login },
   { path: '/auth/register', element: Register },
   { path: '/auth/reset-password', element: ResetPassword },
