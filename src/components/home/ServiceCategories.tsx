@@ -135,15 +135,15 @@ const ServiceCategories = () => {
                   key={index}
                   className="flex-shrink-0 w-32 sm:w-40 bg-white rounded-2xl p-4 sm:p-6 cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
                 >
-                  <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${category.gradient} rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
-                    <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${category.gradient} rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
+                    <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   
-                  <h3 className="text-sm sm:text-base font-heading font-bold text-rich-charcoal mb-2 leading-tight">
+                  <h3 className="text-xs sm:text-sm font-heading font-bold text-rich-charcoal mb-1 sm:mb-2 leading-tight">
                     {category.title}
                   </h3>
                   
-                  <p className="text-xs sm:text-sm text-medium-gray leading-relaxed line-clamp-3">
+                  <p className="text-xs text-medium-gray leading-tight line-clamp-2">
                     {category.description}
                   </p>
                 </div>
