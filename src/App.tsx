@@ -7,7 +7,7 @@ function App() {
   return (
     <Routes>
       {routes.map(({ path, element: Component, layout }) => {
-        if (layout === 'vendor') {
+        if (layout === 'vendor' || layout === 'dashboard') {
           return <Route key={path} path={path} element={<Component />} />;
         }
         
